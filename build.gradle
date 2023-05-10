@@ -1,0 +1,72 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.6'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'nu.studer.jooq' version '8.2'
+}
+
+group = 'dev.laksitha'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    //add jooq dependency
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
+    jooqGenerator 'org.postgresql:postgresql:42.3.1'
+    jooqGenerator 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.0'
+    runtimeOnly 'org.postgresql:postgresql:42.3.1'
+    //configure swagger
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    //add postgresql dependency
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+jooq {
+    version = '3.17.8'
+    configurations {
+        main {
+            generationTool {
+                jdbc {
+                    driver = 'org.postgresql.Driver'
+                    url = 'jdbc:postgresql://localhost:5432/terminal_svc_db'
+                    user = ''
+                    password = ''
+                }
+                generator {
+                    name = 'org.jooq.codegen.DefaultGenerator'
+                    database {
+                        name = 'org.jooq.meta.postgres.PostgresDatabase'
+                        inputSchema = 'public'
+                    }
+                    target {
+                        packageName = 'dev.laksitha.autogen'
+                        directory = 'src/generated-db-entities/java/'
+                    }
+                    generate {
+                        relations = false
+                        records = true
+                        pojos = true
+                        daos = false
+                        springAnnotations = true
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+tasks.named('generateJooq').configure {
+    // make jOOQ task participate in incremental builds (which is also a prerequisite for build caching)
+    allInputsDeclared = true
+}
