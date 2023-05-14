@@ -17,7 +17,4 @@ jobs:
           fetch-depth: 0
       - name: Check Changed Files
         shell: bash
-        run: |
-          for file in ${{ steps.changed-files.outputs.changed_files }}; do
-              echo "$file was changed"
-          done
+        run: git diff --name-only -r HEAD^1 HEAD
