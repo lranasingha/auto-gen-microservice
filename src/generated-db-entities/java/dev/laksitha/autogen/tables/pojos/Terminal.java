@@ -17,6 +17,7 @@ public class Terminal implements Serializable {
 
     private String id;
     private String name;
+    private String description;
     private String status;
 
     public Terminal() {}
@@ -24,16 +25,19 @@ public class Terminal implements Serializable {
     public Terminal(Terminal value) {
         this.id = value.id;
         this.name = value.name;
+        this.description = value.description;
         this.status = value.status;
     }
 
     public Terminal(
         String id,
         String name,
+        String description,
         String status
     ) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.status = status;
     }
 
@@ -63,6 +67,20 @@ public class Terminal implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Getter for <code>public.terminal.description</code>.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Setter for <code>public.terminal.description</code>.
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
@@ -100,6 +118,12 @@ public class Terminal implements Serializable {
         }
         else if (!this.name.equals(other.name))
             return false;
+        if (this.description == null) {
+            if (other.description != null)
+                return false;
+        }
+        else if (!this.description.equals(other.description))
+            return false;
         if (this.status == null) {
             if (other.status != null)
                 return false;
@@ -115,6 +139,7 @@ public class Terminal implements Serializable {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime * result + ((this.description == null) ? 0 : this.description.hashCode());
         result = prime * result + ((this.status == null) ? 0 : this.status.hashCode());
         return result;
     }
@@ -125,6 +150,7 @@ public class Terminal implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(name);
+        sb.append(", ").append(description);
         sb.append(", ").append(status);
 
         sb.append(")");
