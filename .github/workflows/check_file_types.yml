@@ -14,10 +14,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - name: Get Changed Files
         id: changed-files
         uses: tj-actions/changed-files@v14.6
+        with:
+          files: |
+            **/db/changelog/master.yml
+            **/src/main/**/*.java
+            **/src/test/**/*.java
       - name: List all changed files
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
