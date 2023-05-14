@@ -24,6 +24,7 @@ jobs:
             **/src/main/**/*.java
             **/src/test/**/*.java
       - name: List all changed files
-        if: steps.changed-files.outputs.all_changed_files == 'true'
+        if: steps.changed-files.outputs.only_changed == 'true'
         run: |
           echo "WARNING: DB changes are bundled with Code changes"
+          echo "List all the files that have changed: ${{ steps.changed-files.outputs.all_changed_files }}"
