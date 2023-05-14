@@ -25,7 +25,6 @@ jobs:
             src/test/**/*.java
       - name: Check if DB changes are bundled with Code changes
         if: ${{steps.changed-files.outputs.all_changed_files}}
-#        if: ${{endsWith(join(steps.changed-files.outputs.all_changed_files, ','), 'java') || endsWith(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml')}}
         run: |
           echo "** DB changes are bundled with code changes **"
           echo "All changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
