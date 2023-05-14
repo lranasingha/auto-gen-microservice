@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Get Changed Files
+      - name: Get Changed DB and Code files
         id: changed-files
         uses: tj-actions/changed-files@v14.6
         with:
@@ -23,8 +23,9 @@ jobs:
             **/db/changelog/master.yml
             **/src/main/**/*.java
             **/src/test/**/*.java
-      - name: List all changed files
+      - name: Check if DB changes are bundled with Code changes
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
-          echo "WARNING: DB changes are bundled with Code changes"
-          echo "List all the files that have changed: ${{ steps.changed-files.outputs.all_changed_files }}"
+          echo "** DB changes are bundled with code changes **"
+          echo "All changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+          exit 1
