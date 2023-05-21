@@ -55,6 +55,7 @@ jooq {
                     database {
                         name = 'org.jooq.meta.postgres.PostgresDatabase'
                         inputSchema = 'public'
+                        excludes = 'databasechangelog|databasechangeloglock'
                     }
                     target {
                         packageName = 'dev.laksitha.autogen'
@@ -67,6 +68,7 @@ jooq {
                         daos = false
                         springAnnotations = true
                     }
+
                 }
 
             }

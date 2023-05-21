@@ -19,9 +19,11 @@ public class TerminalService {
 
     //get terminal by id method
     public Terminal getTerminalById(String id) {
-        //return terminal response
-        //get terminal record by id from terminal repository
-        //map terminal record to terminal model
+        //check if id is null
+        if (id == null) {
+            throw new IllegalArgumentException("Terminal id cannot be null");
+        }
+
         return terminalRepository.getTerminalById(id).map(this::mapTerminalRecordToTerminalModel);
     }
 

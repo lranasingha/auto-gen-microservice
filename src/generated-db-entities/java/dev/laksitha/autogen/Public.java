@@ -4,8 +4,6 @@
 package dev.laksitha.autogen;
 
 
-import dev.laksitha.autogen.tables.Databasechangelog;
-import dev.laksitha.autogen.tables.Databasechangeloglock;
 import dev.laksitha.autogen.tables.Terminal;
 
 import java.util.Arrays;
@@ -30,16 +28,6 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
-     * The table <code>public.databasechangelog</code>.
-     */
-    public final Databasechangelog DATABASECHANGELOG = Databasechangelog.DATABASECHANGELOG;
-
-    /**
-     * The table <code>public.databasechangeloglock</code>.
-     */
-    public final Databasechangeloglock DATABASECHANGELOGLOCK = Databasechangeloglock.DATABASECHANGELOGLOCK;
-
-    /**
      * The table <code>public.terminal</code>.
      */
     public final Terminal TERMINAL = Terminal.TERMINAL;
@@ -60,8 +48,6 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            Databasechangelog.DATABASECHANGELOG,
-            Databasechangeloglock.DATABASECHANGELOGLOCK,
             Terminal.TERMINAL
         );
     }
