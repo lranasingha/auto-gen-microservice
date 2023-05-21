@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: create-terminal-table.sql
+      relativeToChangelogFile: true

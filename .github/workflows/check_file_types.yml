@@ -20,11 +20,11 @@ jobs:
         uses: tj-actions/changed-files@v14.6
         with:
           files: |
-            **/db/changelog/master.yml
-            **/src/main/**/*.java
-            **/src/test/**/*.java
+            src/main/resources/db/changelog/master.yaml
+            src/main/**/*.java
+            src/test/**/*.java
       - name: Check if DB changes are bundled with Code changes
-        if: steps.changed-files.outputs.only_changed == 'true'
+        if: ${{contains(join(steps.changed-files.outputs.all_changed_files, ','), 'java') && contains(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml')}}
         run: |
           echo "** DB changes are bundled with code changes **"
           echo "All changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
