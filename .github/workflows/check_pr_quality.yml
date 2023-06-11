@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Get Changed Files
-        id: all-changed
+        id: changed
         uses: tj-actions/changed-files@v36.1.0
         with:
           separator: ","
@@ -25,7 +25,7 @@ jobs:
             src/test/**/*.java
       - name: Check for bundled Database and Code changes
         #This is long and ugly, but multiline conditions don't seem to work
-        if: ${{contains(steps.all-changed.outputs.all_changed_files, 'java') && (contains(steps.all-changed.outputs.all_changed_files, 'yaml') || contains(steps.all-changed.outputs.all_changed_files, 'yaml'))}}
+        if: ${{contains(steps.changed.outputs.all_changed_files, 'java') && (contains(steps.changed.outputs.all_changed_files, 'yaml') || contains(steps.changed.outputs.all_changed_files, 'yaml'))}}
         run: |
           echo "::warning DB changes are bundled with code changes. Please separate them into different PRs."
           exit 1
