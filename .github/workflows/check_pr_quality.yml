@@ -28,7 +28,7 @@ jobs:
         run: |
           all_files=${{ steps.changed-files.outputs.all_changed_files }}
           echo "** PR size is too big **"
-          echo "Max allowed changed files count: 50. This PR has total changed files: $("$all_files" | wc -l)"
+          echo "$all_files" | wc -l
       - name: Check for bundled Database and Code changes
         if: |
           ${{
