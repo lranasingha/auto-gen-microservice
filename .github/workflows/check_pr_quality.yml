@@ -28,7 +28,8 @@ jobs:
         env:
           all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          echo "** PR size is too big ** $all_changed_files"
+          echo "** PR size is too big ** ${{ steps.changed-files.outputs.all_changed_files }}"
+          echo ${{ steps.changed-files.outputs.all_changed_files }}
       - name: Check for bundled Database and Code changes
         if: |
           ${{
