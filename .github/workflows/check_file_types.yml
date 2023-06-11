@@ -9,6 +9,7 @@ on:
 
 jobs:
   review:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

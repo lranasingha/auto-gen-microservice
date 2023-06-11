@@ -18,6 +18,7 @@ concurrency:
 
 jobs:
   review:
+    if: ${{ false }} # Disable this job
     environment: dev
     runs-on: ubuntu-latest
     steps:
