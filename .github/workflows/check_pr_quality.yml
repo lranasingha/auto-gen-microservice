@@ -26,8 +26,8 @@ jobs:
             src/test/**/*.java
       - name: Check PR Size
         run: |
-          all_files_count=${{ steps.changed-files.outputs.all_changed_files }} | wc -l
-#          echo "** PR size is too big ** $all_files_count"
+          all_files_count=${{ steps.changed-files.outputs.all_changed_files }}
+          echo "** PR size is too big ** $all_files_count"
       - name: Check for bundled Database and Code changes
         if: |
           ${{
