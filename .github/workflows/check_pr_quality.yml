@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - name: Get Changed Files
         if: ${{ success() }}
         id: changed-files
@@ -23,18 +23,17 @@ jobs:
             src/main/resources/db/changelog/*.{yaml,xml}
             src/main/**/*.java
             src/test/**/*.java
-      - name: Check PR Size
-#        if: ${{ steps.changed-files.outputs.all_changed_files }} | wc -l | xargs test -gt 1
-        run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done
-#      - name: Check for bundled Database and Code changes
-#        if: |
-#          ${{
-#            contains(join(steps.changed-files.outputs.all_changed_files, ','), 'java') &&
-#            (contains(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml') || contains(join(steps.changed-files.outputs.all_changed_files, ','), 'xml'))
-#          }}
+#      - name: Check PR Size
 #        run: |
-#          echo "** DB changes are bundled with code changes **"
-#          exit 1
+#          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+#            echo "$file was changed"
+#          done
+      - name: Check for bundled Database and Code changes
+        if: |
+          ${{
+            contains(join(steps.changed-files.outputs.all_changed_files, ','), 'java') &&
+            (contains(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml') || contains(join(steps.changed-files.outputs.all_changed_files, ','), 'xml'))
+          }}
+        run: |
+          echo "** DB changes are bundled with code changes **"
+          exit 1
