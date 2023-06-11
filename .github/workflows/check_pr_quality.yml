@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  review:
+  pr-quality-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,6 +23,8 @@ jobs:
             src/main/resources/db/changelog/*.{yaml,xml}
             src/main/**/*.java
             src/test/**/*.java
+        run: |
+          echo "All changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
       - name: Check for bundled Database and Code changes
         if: |
           ${{
