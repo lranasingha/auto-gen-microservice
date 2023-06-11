@@ -1,5 +1,4 @@
-name: Check if DB changes are bundled with Code changes
-
+name: PR Quality Check
 permissions:
   contents: read
 
