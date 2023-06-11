@@ -23,8 +23,6 @@ jobs:
             src/main/resources/db/changelog/*.{yaml,xml}
             src/main/**/*.java
             src/test/**/*.java
-        run: |
-          echo "All changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
       - name: Check for bundled Database and Code changes
         if: |
           ${{
@@ -32,5 +30,6 @@ jobs:
             (contains(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml') || contains(join(steps.changed-files.outputs.all_changed_files, ','), 'xml'))
           }}
         run: |
+          echo "All changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
           echo "** DB changes are bundled with code changes **"
           exit 1
