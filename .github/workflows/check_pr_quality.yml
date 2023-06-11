@@ -23,11 +23,6 @@ jobs:
             src/main/resources/db/changelog/*.{yaml,xml}
             src/main/**/*.java
             src/test/**/*.java
-#      - name: Check PR Size
-#        run: |
-#          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-#            echo "$file was changed"
-#          done
       - name: Check for bundled Database and Code changes
         if: |
           ${{
