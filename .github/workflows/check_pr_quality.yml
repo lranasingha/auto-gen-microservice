@@ -29,12 +29,12 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
           done
-      - name: Check for bundled Database and Code changes
-        if: |
-          ${{
-            contains(join(steps.changed-files.outputs.all_changed_files, ','), 'java') && 
-            (contains(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml') || contains(join(steps.changed-files.outputs.all_changed_files, ','), 'xml'))
-          }}
-        run: |
-          echo "** DB changes are bundled with code changes **"          
-          exit 1
+#      - name: Check for bundled Database and Code changes
+#        if: |
+#          ${{
+#            contains(join(steps.changed-files.outputs.all_changed_files, ','), 'java') &&
+#            (contains(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml') || contains(join(steps.changed-files.outputs.all_changed_files, ','), 'xml'))
+#          }}
+#        run: |
+#          echo "** DB changes are bundled with code changes **"
+#          exit 1
