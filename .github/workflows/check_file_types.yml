@@ -9,24 +9,30 @@ on:
 
 jobs:
   review:
-    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Get Changed DB and Code files
+      - name: Get Changed Files
+        if: ${{ success() }}
         id: changed-files
         uses: tj-actions/changed-files@v14.6
         with:
           files: |
-            src/main/resources/db/changelog/master.yaml
+            src/main/resources/db/changelog/master.*
             src/main/**/*.java
             src/test/**/*.java
-      - name: Check if DB changes are bundled with Code changes
-        if: ${{contains(join(steps.changed-files.outputs.all_changed_files, ','), 'java') && contains(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml')}}
+      - name: Check PR Size
+        if: ${{ steps.changed-files.outputs.total_changed_files > 1 }}
         run: |
-          echo "** DB changes are bundled with code changes **"
-          echo "All changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+          echo "** PR size is too big **"
+          echo "Max allowed changed files count: 50. This PR has total changed files: ${{ steps.changed-files.outputs.total_changed_files }}"
+      - name: Check for bundled Database and Code changes
+        if: |
+          ${{contains(join(steps.changed-files.outputs.all_changed_files, ','), 'java') 
+          && (contains(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml') || contains(join(steps.changed-files.outputs.all_changed_files, ','), 'xml')))}}
+        run: |
+          echo "** DB changes are bundled with code changes **"          
           exit 1
