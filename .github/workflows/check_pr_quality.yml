@@ -24,7 +24,6 @@ jobs:
             src/main/**/*.java
             src/test/**/*.java
       - name: Check PR Size
-        if: steps.changed-files.outputs.any_changed == 'true'
         run: |
           echo "** PR size is too big ** ${{ steps.changed-files.outputs.all_changed_files }}"
           echo ${{ steps.changed-files.outputs.all_changed_files }}
