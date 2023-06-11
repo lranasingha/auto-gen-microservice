@@ -20,7 +20,8 @@ jobs:
         uses: tj-actions/changed-files@v14.6
         with:
           files: |
-            src/main/resources/db/changelog/master.*
+            src/main/resources/db/changelog/master.yaml
+            src/main/resources/db/changelog/master.xml
             src/main/**/*.java
             src/test/**/*.java
 #      - name: Check PR Size
@@ -31,7 +32,8 @@ jobs:
       - name: Check for bundled Database and Code changes
         if: |
           ${{
-            contains(join(steps.changed-files.outputs.all_changed_files, ','), 'java') && (contains(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml') || contains(join(steps.changed-files.outputs.all_changed_files, ','), 'xml'))
+            contains(join(steps.changed-files.outputs.all_changed_files, ','), 'java') && 
+            (contains(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml') || contains(join(steps.changed-files.outputs.all_changed_files, ','), 'xml'))
           }}
         run: |
           echo "** DB changes are bundled with code changes **"          
