@@ -15,9 +15,9 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v36.1.0
+        with:
+          separator: ","
 
       - name: List all changed files
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done
+          echo "all ${{steps.changed-files.outputs.all_changed_files}}"
