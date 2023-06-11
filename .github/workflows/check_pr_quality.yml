@@ -24,11 +24,11 @@ jobs:
             src/main/resources/db/changelog/master.xml
             src/main/**/*.java
             src/test/**/*.java
-#      - name: Check PR Size
-#        if: ${{ steps.changed-files.outputs.total_changed_files > 1 }}
-#        run: |
-#          echo "** PR size is too big **"
-#          echo "Max allowed changed files count: 50. This PR has total changed files: ${{ steps.changed-files.outputs.total_changed_files }}"
+      - name: Check PR Size
+        if: ${{ steps.changed-files.outputs.total_changed_files > 1 }}
+        run: |
+          echo "** PR size is too big **"
+          echo "Max allowed changed files count: 50. This PR has total changed files: ${{ steps.changed-files.outputs.total_changed_files }}"
       - name: Check for bundled Database and Code changes
         if: |
           ${{
