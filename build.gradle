@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.0.6'
     id 'io.spring.dependency-management' version '1.1.0'
     id 'nu.studer.jooq' version '8.2'
+    id 'org.liquibase.gradle' version '2.0.4'
 }
 
 group = 'dev.laksitha'
@@ -16,11 +17,18 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    runtimeOnly 'org.postgresql:postgresql:42.3.8'
+
+    //liquibase
+    liquibaseRuntime 'org.liquibase:liquibase-core:4.16.1'
+    liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:3.0.2'
+    liquibaseRuntime 'org.postgresql:postgresql:42.3.8'
+
     //add jooq dependency
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
-    jooqGenerator 'org.postgresql:postgresql:42.3.1'
+    jooqGenerator 'org.postgresql:postgresql:42.3.8'
     jooqGenerator 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.0'
-    runtimeOnly 'org.postgresql:postgresql:42.3.1'
     //configure swagger
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     //add postgresql dependency
@@ -66,6 +74,17 @@ jooq {
     }
 }
 
+liquibase {
+    activities {
+        main {
+            changelogFile 'src/main/resources/db/changelog/master.yaml'
+            url 'jdbc:postgresql://localhost:5432/terminal_svc_db'
+            logLevel "info"
+            username ''
+            password ''
+        }
+    }
+}
 tasks.named('generateJooq').configure {
     // make jOOQ task participate in incremental builds (which is also a prerequisite for build caching)
     allInputsDeclared = true

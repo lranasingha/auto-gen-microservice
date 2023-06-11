@@ -2,6 +2,3 @@ databaseChangeLog:
   - include:
       file: create-terminal-table.sql
       relativeToChangelogFile: true
-  - include:
-      file: add-index-to-terminal-table.sql
-      relativeToChangelogFile: true
