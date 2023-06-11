@@ -26,8 +26,7 @@ jobs:
       - name: Check for bundled Database and Code changes
         if: |
           ${{
-            contains(steps.changed-files.outputs.all_changed_files, 'java') &&
-            (contains(steps.changed-files.outputs.all_changed_files, 'yaml') || contains(steps.changed-files.outputs.all_changed_files, 'xml'))
+            contains(steps.changed-files.outputs.all_changed_files, 'java') && contains(steps.changed-files.outputs.all_changed_files, 'yaml')
           }}
         run: |
           echo "** DB changes are bundled with code changes **"
