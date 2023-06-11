@@ -30,7 +30,6 @@ jobs:
 #            (contains(join(steps.changed-files.outputs.all_changed_files, ','), 'yaml') || contains(join(steps.changed-files.outputs.all_changed_files, ','), 'xml'))
 #          }}
         run: |
-          echo "The job_id is: $GITHUB_JOB" 
-          echo ${{ steps.changed-files.outputs.all_changed_files }}
+          echo "all ${{steps.changed-files.outputs.all_changed_files}}"
           echo "** DB changes are bundled with code changes **"
           exit 1
