@@ -24,9 +24,9 @@ jobs:
             src/main/resources/db/changelog/master.xml
             src/main/**/*.java
             src/test/**/*.java
-      - name: Check PR Size
         env:
           all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
+      - name: Check PR Size
         run: |
           echo "** PR size is too big ** ${{ steps.changed-files.outputs.all_changed_files }}"
           echo ${{ steps.changed-files.outputs.all_changed_files }}
