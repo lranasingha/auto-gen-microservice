@@ -16,3 +16,5 @@ jobs:
         run: |
           gh pr view ${{ github.event.number }} --json files --jq '.files.[].path' | cat
           exit 1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
