@@ -20,13 +20,11 @@ jobs:
         uses: tj-actions/changed-files@v14.6
         with:
           files: |
-            src/main/resources/db/changelog/master.yaml
-            src/main/resources/db/changelog/master.xml
+            src/main/resources/db/changelog/*.{yaml,xml}
             src/main/**/*.java
             src/test/**/*.java
-        env:
-          all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
       - name: Check PR Size
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: |
           echo "** PR size is too big ** ${{ steps.changed-files.outputs.all_changed_files }}"
           echo ${{ steps.changed-files.outputs.all_changed_files }}
