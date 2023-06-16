@@ -23,7 +23,9 @@ jobs:
             src/main/resources/db/changelog/master.{yaml,yml,xml}
             src/main/**/*.java
             src/test/**/*.java
-      - name: Check for bundled Database and Code changes
-        # the line breaks don't work with if condition, so have to keep this ugly long condition
+      - name: Checking for bundled Database and Code changes
+        # The line breaks don't work with if condition, so have to keep this ugly long condition
         if: ${{contains(steps.changed.outputs.all_changed_files, 'java') && (contains(steps.changed.outputs.all_changed_files, 'yaml') || contains(steps.changed.outputs.all_changed_files, 'yml') || contains(steps.changed.outputs.all_changed_files, 'xml'))}}
-        run: echo "DB changes are bundled with code changes. Please separate them into different PRs." >> $GITHUB_STEP_SUMMARY
+        run: |
+          SUMMARY=$'## DB changes are bundled with code changes. Please separate them into different PRs.'
+          echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
