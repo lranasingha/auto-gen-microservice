@@ -6,8 +6,10 @@ package dev.laksitha.autogen;
 
 import dev.laksitha.autogen.tables.Databasechangeloglock;
 import dev.laksitha.autogen.tables.Terminal;
+import dev.laksitha.autogen.tables.TerminalSettings;
 import dev.laksitha.autogen.tables.records.DatabasechangeloglockRecord;
 import dev.laksitha.autogen.tables.records.TerminalRecord;
+import dev.laksitha.autogen.tables.records.TerminalSettingsRecord;
 
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -28,4 +30,5 @@ public class Keys {
 
     public static final UniqueKey<DatabasechangeloglockRecord> DATABASECHANGELOGLOCK_PKEY = Internal.createUniqueKey(Databasechangeloglock.DATABASECHANGELOGLOCK, DSL.name("databasechangeloglock_pkey"), new TableField[] { Databasechangeloglock.DATABASECHANGELOGLOCK.ID }, true);
     public static final UniqueKey<TerminalRecord> TERMINAL_PKEY = Internal.createUniqueKey(Terminal.TERMINAL, DSL.name("terminal_pkey"), new TableField[] { Terminal.TERMINAL.ID }, true);
+    public static final UniqueKey<TerminalSettingsRecord> TERMINAL_SETTINGS_PKEY = Internal.createUniqueKey(TerminalSettings.TERMINAL_SETTINGS, DSL.name("terminal_settings_pkey"), new TableField[] { TerminalSettings.TERMINAL_SETTINGS.ID }, true);
 }

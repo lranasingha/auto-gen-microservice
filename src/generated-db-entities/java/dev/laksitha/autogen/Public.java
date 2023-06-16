@@ -7,6 +7,7 @@ package dev.laksitha.autogen;
 import dev.laksitha.autogen.tables.Databasechangelog;
 import dev.laksitha.autogen.tables.Databasechangeloglock;
 import dev.laksitha.autogen.tables.Terminal;
+import dev.laksitha.autogen.tables.TerminalSettings;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,6 +46,11 @@ public class Public extends SchemaImpl {
     public final Terminal TERMINAL = Terminal.TERMINAL;
 
     /**
+     * The table <code>public.terminal_settings</code>.
+     */
+    public final TerminalSettings TERMINAL_SETTINGS = TerminalSettings.TERMINAL_SETTINGS;
+
+    /**
      * No further instances allowed
      */
     private Public() {
@@ -62,7 +68,8 @@ public class Public extends SchemaImpl {
         return Arrays.asList(
             Databasechangelog.DATABASECHANGELOG,
             Databasechangeloglock.DATABASECHANGELOGLOCK,
-            Terminal.TERMINAL
+            Terminal.TERMINAL,
+            TerminalSettings.TERMINAL_SETTINGS
         );
     }
 }

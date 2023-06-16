@@ -4,15 +4,19 @@
 package dev.laksitha.autogen.tables;
 
 
+import dev.laksitha.autogen.Indexes;
 import dev.laksitha.autogen.Keys;
 import dev.laksitha.autogen.Public;
 import dev.laksitha.autogen.tables.records.TerminalRecord;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function4;
+import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
@@ -105,6 +109,11 @@ public class Terminal extends TableImpl<TerminalRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
+    }
+
+    @Override
+    public List<Index> getIndexes() {
+        return Arrays.asList(Indexes.IDX_TERMINAL_NAME);
     }
 
     @Override
