@@ -28,4 +28,5 @@ jobs:
         if: ${{contains(steps.changed.outputs.all_changed_files, 'java') && (contains(steps.changed.outputs.all_changed_files, 'yaml') || contains(steps.changed.outputs.all_changed_files, 'yml') || contains(steps.changed.outputs.all_changed_files, 'xml'))}}
         run: |
           SUMMARY=$'## DB changes are bundled with code changes. Please separate them into different PRs.'
+          echo "::error::DB changes are bundled with code changes. Please separate them into different PRs."
           echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
