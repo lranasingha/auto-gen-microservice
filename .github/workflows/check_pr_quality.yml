@@ -28,6 +28,6 @@ jobs:
         if: ${{contains(steps.changed.outputs.all_changed_files, 'java') && (contains(steps.changed.outputs.all_changed_files, 'yaml') || contains(steps.changed.outputs.all_changed_files, 'yml') || contains(steps.changed.outputs.all_changed_files, 'xml'))}}
         run: |
           echo "::error::DB changes are coupled with the application code changes. Please separate them into different PRs."
-          SUMMARY=$'##DB changes are coupled with application code changes. Please separate them into different PRs.\n
-          The coupled DB and code changes can cause incidents on production and hard to rollback if needed.'
+          SUMMARY=$'## DB changes are coupled with application code changes. Please separate them into different PRs.\n
+          Such coupled changes can cause incidents on production and make deployments hard to rollback if needed.'
           echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
