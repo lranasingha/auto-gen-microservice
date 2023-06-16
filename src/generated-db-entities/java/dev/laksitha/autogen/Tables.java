@@ -7,6 +7,7 @@ package dev.laksitha.autogen;
 import dev.laksitha.autogen.tables.Databasechangelog;
 import dev.laksitha.autogen.tables.Databasechangeloglock;
 import dev.laksitha.autogen.tables.Terminal;
+import dev.laksitha.autogen.tables.TerminalSettings;
 
 
 /**
@@ -29,4 +30,9 @@ public class Tables {
      * The table <code>public.terminal</code>.
      */
     public static final Terminal TERMINAL = Terminal.TERMINAL;
+
+    /**
+     * The table <code>public.terminal_settings</code>.
+     */
+    public static final TerminalSettings TERMINAL_SETTINGS = TerminalSettings.TERMINAL_SETTINGS;
 }

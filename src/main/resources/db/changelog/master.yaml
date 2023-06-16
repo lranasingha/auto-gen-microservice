@@ -3,7 +3,7 @@ databaseChangeLog:
       file: create-terminal-table.sql
       relativeToChangelogFile: true
   - include:
-      file: add-index-to-terminal-table.sql
+      file: add-index-to-terminal-name.sql
       relativeToChangelogFile: true
   - include:
       file: create-terminal-settings-table.sql
