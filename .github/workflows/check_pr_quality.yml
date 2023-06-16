@@ -26,4 +26,4 @@ jobs:
       - name: Check for bundled Database and Code changes
         #This is long and ugly, but multiline conditions don't seem to work
         if: ${{contains(steps.changed.outputs.all_changed_files, 'java') && (contains(steps.changed.outputs.all_changed_files, 'yaml') || contains(steps.changed.outputs.all_changed_files, 'xml'))}}
-        run: echo "::erorr::DB changes are bundled with code changes. Please separate them into different PRs."
+        run: echo "::error::DB changes are bundled with code changes. Please separate them into different PRs."
