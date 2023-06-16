@@ -24,9 +24,5 @@ jobs:
             src/main/**/*.java
             src/test/**/*.java
       - name: Check for bundled Database and Code changes
-        if: |
-          ${{contains(steps.changed.outputs.all_changed_files, 'java') && 
-          (contains(steps.changed.outputs.all_changed_files, 'yaml') || 
-          contains(steps.changed.outputs.all_changed_files, 'yml') || 
-          contains(steps.changed.outputs.all_changed_files, 'xml'))}}
+        if: ${{contains(steps.changed.outputs.all_changed_files, 'java') && (contains(steps.changed.outputs.all_changed_files, 'yaml') || contains(steps.changed.outputs.all_changed_files, 'yml') || contains(steps.changed.outputs.all_changed_files, 'xml'))}}
         run: echo "::error::DB changes are bundled with code changes. Please separate them into different PRs."
