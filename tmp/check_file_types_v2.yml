@@ -1,0 +1,21 @@
+name: Check if DB changes are bundled with Code changes
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  review:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: List Changed Files
+        id: changed-files
+        run: |
+          gh pr view ${{ github.event.number }} --json files --jq '.files.[].path'
+          exit 1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
