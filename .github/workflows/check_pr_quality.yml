@@ -1,16 +1,9 @@
 name: PR Quality Check
 permissions:
   contents: read
-
-inputs:
-  fail_on_error:
-    description: 'Whether to fail the job if the check fails'
-    required: false
-    default: false
-
 on:
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   pr-quality-check:
@@ -20,23 +13,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Get Changed Files
-        id: changed
-        uses: tj-actions/changed-files@v36.1.0
+      - name: Coupled DB and Code Changes
+        uses: lranasingha/auto-gen-microservice/coupledchanges@v1
         with:
-          separator: ","
-          # only pick the liquibase master file and production .java files
-          files: |
-            src/main/resources/db/changelog/master.{yaml,yml,xml}
-            src/main/**/*.java
-      - name: Checking for bundled Database and Code changes
-        # The line breaks don't work with if condition, so have to keep this ugly long condition
-        if: ${{contains(steps.changed.outputs.all_changed_files, 'java') && (contains(steps.changed.outputs.all_changed_files, 'yaml') || contains(steps.changed.outputs.all_changed_files, 'yml') || contains(steps.changed.outputs.all_changed_files, 'xml'))}}
-        run: |
-          echo "::error::DB changes are coupled with the application code changes. Please separate them into different PRs."
-          SUMMARY=$'## DB changes are coupled with application code changes. Please separate them into different PRs.\n
-          Such coupled changes can cause incidents on production and make deployments hard to rollback if needed.'
-          echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ inputs.fail_on_error }}" = "true" ]; then
-            exit 1
-          fi
+          fail_on_error: true
