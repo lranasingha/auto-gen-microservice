@@ -17,6 +17,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: Coupled DB and Code Changes
-        uses: auto-gen-microservice/github/actions/coupledchanges
+        uses: auto-gen-microservice/.github/coupledchanges
         with:
           fail_on_error: true
