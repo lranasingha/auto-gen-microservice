@@ -17,6 +17,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: Coupled DB and Code Changes
-        uses: ./.github/coupledchanges
+        uses: ./coupledchanges
         with:
           fail_on_error: true
