@@ -26,11 +26,11 @@ runs:
       # The line breaks don't work with if condition, so have to keep this ugly long condition
       if: ${{contains(steps.changed.outputs.all_changed_files, 'java') && (contains(steps.changed.outputs.all_changed_files, 'yaml') || contains(steps.changed.outputs.all_changed_files, 'yml') || contains(steps.changed.outputs.all_changed_files, 'xml'))}}
       run: |
-        echo "::error::DB changes are coupled with the application code changes. Please separate them into different PRs."
         SUMMARY=$'## DB changes are coupled with application code changes. Please separate them into different PRs.\n
         Such coupled changes can cause incidents on production and make deployments hard to rollback if needed.'
         echo "$SUMMARY" >> $GITHUB_STEP_SUMMARY
         if [ "${{ inputs.fail_on_error }}" = "true" ]; then
+          echo "::error::DB changes are coupled with the application code changes. Please separate them into different PRs."
           exit 1
         fi
       shell: bash
