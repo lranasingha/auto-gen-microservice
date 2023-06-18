@@ -3,7 +3,7 @@ permissions:
   contents: read
 on:
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   coupledchanges:
@@ -17,6 +17,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: Coupled DB and Code Changes
-        uses: ./../coupledchanges
+        uses: ./github/actions/coupledchanges
         with:
           fail_on_error: true
