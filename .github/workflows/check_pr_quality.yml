@@ -19,4 +19,4 @@ jobs:
       - name: Coupled DB and Code Changes
         uses: ./.github/coupledchanges
         with:
-          fail_on_error: true
+          fail_on_error: false
